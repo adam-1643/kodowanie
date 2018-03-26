@@ -36,7 +36,41 @@ Kod::Kod() {
         }
         std::cout << "\n";
     }
+    std::cout << "\n-------\n\n";
+    for(int i = 0; i < k; i++) {
+        for(int j = 0; j < n-k; j++) {
+            matrixH[i][j] = genMatrix[i][j+k];
+            std::cout << matrixH[i][j];
+        }
+        std::cout << "\n";
+    }
+    std::cout << "----\n";
+    for(int i = k; i < n; i++) {
+        for(int j = 0; j < n-k; j++) {
+            matrixH[i][j] = i-k == j ? 1 : 0;
+            std::cout << matrixH[i][j];
+        }
+        std::cout << "\n";
+    }
     
+}
+
+std::vector<int> Kod::checkValidity() {
+    for(int i = 0; i < n-k; i++) {
+        for(int j = 0; j < n; j++) {
+            syndrome.at(i) += code.at(j)*matrixH[j][i];
+        }
+        syndrome.at(i) = syndrome.at(i)%2;
+    }
+    
+    for(int i = 0; i < n-k; i++) {
+        if(syndrome.at(i) == 1) {
+            correct = 0;
+            correctable = 0;
+        }
+    }
+    
+    return syndrome;
 }
 
 bool Kod::isCorrect() {
@@ -88,6 +122,7 @@ std::vector<int> Kod::encodeData(std::vector<int> data) {
         }
     }
     formatData();
+    //checkValidity();
     return code;
 }
 
@@ -130,4 +165,20 @@ std::vector<int> Kod::division(std::vector<int> poly1, std::vector<int> poly2) {
 //    std::cout << std::endl;
     return poly1;
 }
+
+std::string Kod::formatOutputData(std::vector<int> data) {
+    std::string output;
+    
+    for(int i = 0; i < data.size(); i++) {
+        
+        output.append(std::to_string(data.at(i)));
+        
+    }
+    
+    return output;
+}
+
+
+
+
 

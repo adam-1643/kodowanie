@@ -37,6 +37,17 @@ void division(std::vector<int> poly1, std::vector<int> poly2) {
 int main() {
     
     Kod k;
+    std::string str;
+    std::cout << "Wprowadź slowo informacyjne: ";
+    std::cin >> str;
+    
+    std::cout << k.formatOutputData(k.encodeData(k.loadData(str)));
+    if(k.isCorrect()) {
+        std::cout << "Kod poprawny";
+    } else {
+        std::cout << "Kod bledny";
+    }
+    
    // std::string aa;
     //std::cin >> aa;
     //k.loadData(aa);
