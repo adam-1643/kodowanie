@@ -10,6 +10,13 @@
 
 Kod::Kod() {
     
+    createGenMatrix();
+    createMatrixH();
+
+    
+}
+
+void Kod::createGenMatrix() {
     std::vector<int> rem = std::vector<int>(n,-1);
     std::vector<int> genVec = std::vector<int>(n-k+1,1);
     for(int i = 0; i < n-k+1; i++) {
@@ -36,6 +43,9 @@ Kod::Kod() {
         }
         std::cout << "\n";
     }
+}
+
+void Kod::createMatrixH() {
     std::cout << "\n-------\n\n";
     for(int i = 0; i < k; i++) {
         for(int j = 0; j < n-k; j++) {
@@ -52,91 +62,6 @@ Kod::Kod() {
         }
         std::cout << "\n";
     }
-    
-}
-
-std::vector<int> Kod::checkValidity() {
-    for(int i = 0; i < n-k; i++) {
-        for(int j = 0; j < n; j++) {
-            syndrome.at(i) += code.at(j)*matrixH[j][i];
-        }
-        syndrome.at(i) = syndrome.at(i)%2;
-    }
-    correct = 1;
-    correctable = 1;
-    
-    for(int i = 0; i < n-k; i++) {
-        if(syndrome.at(i) == 1) {
-            correct = 0;
-            correctable = 0;
-        }
-    }
-    
-    return syndrome;
-}
-
-bool Kod::isCorrect() {
-    return correct;
-}
-
-bool Kod::isCorrectable() {
-    return correctable;
-}
-
-bool Kod::isDataValid(std::vector<int> data, bool type) {
-    
-    if(type == 0) {
-        if(data.size() != k) return false;
-    }
-    if(type == 1) {
-        if(data.size() != n) return false;
-    }
-    
-    for(int i = 0; i < data.size() ; i++) {
-        if(data.at(i) != 0 && data.at(i) != 1) return false;
-    }
-    
-    return true;
-}
-
-void Kod::formatData() {
-    
-    for(int i = 0; i < n; i++) {
-        code.at(i) = code.at(i)%2;
-    }
-    
-//    for(int i = 0; i < n; i++) {
-//        message.at(i) = message.at(i)%2 + 1;
-//    }
-    
-}
-
-std::vector<int> Kod::encodeData(std::vector<int> data) {
-    
-    if(!isDataValid(data, 0)) {
-        return std::vector<int>(1,-1);
-    }
-    code = std::vector<int>(n,0);
-    
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < k; j++) {
-            if(data.at(j) == 1 && genMatrix[j][i] == 1) code.at(i)++;
-        }
-    }
-    formatData();
-    
-    return code;
-}
-
-std::vector<int> Kod::decodeData(std::vector<int> data) {
-    
-    if(!isDataValid(data, 1)) {
-        return std::vector<int>(1,-1);
-    }
-    code = data;
-    
-    checkValidity();
-    return message;
 }
 
 std::vector<int> Kod::loadData(std::string data) {
@@ -161,22 +86,15 @@ std::vector<int> Kod::division(std::vector<int> poly1, std::vector<int> poly2) {
             poly1.at(j+i) = (poly1.at(j+i) + poly2.at(j)) % 2;
         }
     }
-    
-//    for(int i = 0; i < l; i++) {
-//        std::cout << poly2.at(i) << " ";
-//    }
-//
-//    std::cout << std::endl;
     return poly1;
 }
 
 std::string Kod::formatOutputData(std::vector<int> data) {
+   
     std::string output;
     
     for(int i = 0; i < data.size(); i++) {
-        
         output.append(std::to_string(data.at(i)));
-        
     }
     
     return output;

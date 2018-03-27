@@ -14,7 +14,9 @@
 #include <iostream>
 #include <string>
 
-class Decoder {
+#include "kod.hpp"
+
+class Decoder : public Kod {
     static const int n = 8;
     static const int k = 3;
     const int gen[n-k+1] = {
@@ -37,13 +39,12 @@ class Decoder {
     std::vector<int> code = std::vector<int>(n,-1);
     std::vector<int> syndrome = std::vector<int>(n-k,0);
     std::vector<int> checkValidity();
-    bool isDataValid(std::vector<int> data, bool type);
-    void formatData();
+    virtual bool isDataValid(std::vector<int> data);
+    virtual void formatData();
     std::vector<int> division(std::vector<int> poly1, std::vector<int> poly2);
 public:
     Decoder();
     std::vector<int> loadData(std::string data);
-    std::vector<int> encodeData(std::vector<int> data);
     std::vector<int> decodeData(std::vector<int> data);
     std::string formatOutputData(std::vector<int> data);
     bool isCorrect();

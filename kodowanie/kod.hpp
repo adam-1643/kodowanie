@@ -15,6 +15,7 @@
 #include <string>
 
 class Kod {
+protected:
     static const int n = 8;
     static const int k = 3;
     const int gen[n-k+1] = {
@@ -29,25 +30,20 @@ class Kod {
     
     int genMatrix[k][n];
     int matrixH[n][n-k];
-   // std::vector<int> remainder[k] = {std::vector<int>(n,-1)};
     
-    bool correct = 1;
-    bool correctable = 1;
-    std::vector<int> message = std::vector<int>(k,-1);
-    std::vector<int> code = std::vector<int>(n,-1);
-    std::vector<int> syndrome = std::vector<int>(n-k,0);
-    std::vector<int> checkValidity();
-    bool isDataValid(std::vector<int> data, bool type);
-    void formatData();
+    std::vector<int> message;
+    std::vector<int> code;
+
+    virtual bool isDataValid(std::vector<int> data) {return true;};
+    virtual void formatData() {};
+    
     std::vector<int> division(std::vector<int> poly1, std::vector<int> poly2);
 public:
     Kod();
     std::vector<int> loadData(std::string data);
-    std::vector<int> encodeData(std::vector<int> data);
-    std::vector<int> decodeData(std::vector<int> data);
     std::string formatOutputData(std::vector<int> data);
-    bool isCorrect();
-    bool isCorrectable();
+    void createGenMatrix();
+    void createMatrixH();
 };
 
 #endif /* kod_hpp */

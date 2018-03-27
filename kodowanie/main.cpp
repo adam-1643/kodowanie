@@ -13,37 +13,14 @@
 #include "coder.hpp"
 #include "decoder.hpp"
 
-void division(std::vector<int> poly1, std::vector<int> poly2) {
-    
-    int l = poly1.size();
-    int g = poly2.size();
-    
-    for(int i = 0; i < l-g+1; i++) {
-        
-        if(poly1.at(i) == 0) continue;
-        
-        for(int j = 0; j < g; j++) {
-            poly1.at(j+i) = (poly1.at(j+i) + poly2.at(j)) % 2;
-        }
-        
-    }
-    
-    for(int i = 0; i < l; i++) {
-        std::cout << poly1.at(i) << " ";
-    }
-
-    std::cout << std::endl;
-    
-}
-
 int main() {
     
-    Kod k;
+    Coder k;
     std::string str;
     std::cout << "Wprowadź slowo informacyjne: ";
     std::cin >> str;
     
-    std::cout << k.formatOutputData(k.decodeData(k.loadData(str)));
+    //std::cout << k.formatOutputData(k.decodeData(k.loadData(str)));
     if(k.isCorrect()) {
         std::cout << "Kod poprawny";
     } else {
