@@ -1,0 +1,8 @@
+Coder class description:
+
+input:
+encodeData      takes 1 parameter, a vector that contains information bits
+loadData        takes 1 parameter, a string with information bits - helps to convert string to vector
+
+output:
+getResult       takes 0 parameter, returns a string with code bits or information with error

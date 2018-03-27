@@ -15,9 +15,15 @@ Coder::Coder() {
 
 bool Coder::isDataValid(std::vector<int> data) {
     
-    if(data.size() != k) return false;
+    if(data.size() != k) {
+        errorMessage = "Błędna długość ciągu informacyjnego!";
+        return false;
+    }
     for(int i = 0; i < data.size() ; i++) {
-        if(data.at(i) != 0 && data.at(i) != 1) return false;
+        if(data.at(i) != 0 && data.at(i) != 1) {
+            errorMessage = "Błędny znak w ciągu informacyjnym";
+            return false;
+        }
     }
     
     return true;
@@ -34,7 +40,7 @@ void Coder::formatData() {
 std::vector<int> Coder::encodeData(std::vector<int> data) {
     
     if(!isDataValid(data)) {
-        result = "Błędny ciąg informacyjny!";
+        result = errorMessage;
         return std::vector<int>(1,-1);
     }
     code = std::vector<int>(n,0);

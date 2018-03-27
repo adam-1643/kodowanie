@@ -34,6 +34,7 @@
 		E84BE981206A94AC009B3310 /* coder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coder.hpp; sourceTree = "<group>"; };
 		E84BE983206A94DB009B3310 /* decoder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = decoder.cpp; sourceTree = "<group>"; };
 		E84BE984206A94DB009B3310 /* decoder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = decoder.hpp; sourceTree = "<group>"; };
+		E84BE986206A9F24009B3310 /* classDescription */ = {isa = PBXFileReference; lastKnownFileType = text; path = classDescription; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +70,7 @@
 				E84BE97620692960009B3310 /* main.cpp */,
 				E84BE980206A94AC009B3310 /* coder.cpp */,
 				E84BE981206A94AC009B3310 /* coder.hpp */,
+				E84BE986206A9F24009B3310 /* classDescription */,
 				E84BE983206A94DB009B3310 /* decoder.cpp */,
 				E84BE984206A94DB009B3310 /* decoder.hpp */,
 				E84BE97D206929AF009B3310 /* kod.cpp */,

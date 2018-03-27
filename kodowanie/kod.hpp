@@ -32,6 +32,7 @@ protected:
     int matrixH[n][n-k];
     
     std::string result;
+    std::string errorMessage;
     
     std::vector<int> message;
     std::vector<int> code;
