@@ -21,11 +21,18 @@ class Decoder : public Kod {
     bool correct = 1;
     bool correctable = 1;
     int noOfErrors = 0;
+    int swap = 0;
 
     std::vector<int> syndrome = std::vector<int>(n-k,0);
+
+    
     std::vector<int> checkValidity();
     virtual bool isDataValid(std::vector<int> data);
     virtual void formatData();
+    
+    void cyclicSwap(bool dir);
+    
+    std::string convertToString(std::vector<int> data);
 public:
     Decoder();
     std::vector<int> decodeData(std::vector<int> data);
@@ -34,6 +41,8 @@ public:
     void doCorrection();
     void tryCorrection();
     void reset();
+    int getCode();
+    std::string getCorrectCode();
 };
 
 #endif /* decoder_hpp */

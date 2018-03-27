@@ -14,6 +14,11 @@ Decoder::Decoder() {
 }
 
 std::vector<int> Decoder::checkValidity() {
+    
+    noOfErrors = 0;
+    syndrome = std::vector<int>(n-k,0);
+    
+    //licze synrom
     for(int i = 0; i < n-k; i++) {
         for(int j = 0; j < n; j++) {
             syndrome.at(i) += code.at(j)*matrixH[j][i];
@@ -21,23 +26,58 @@ std::vector<int> Decoder::checkValidity() {
         syndrome.at(i) = syndrome.at(i)%2;
     }
     
+    //licze bledy w syndromie
     for(int i = 0; i < n-k; i++) {
         if(syndrome.at(i) == 1) {
             noOfErrors++;
         }
     }
-    
-    if(noOfErrors == 0) {
-        correct = 1;
+
+    while(swap < n) {
+        
+        noOfErrors = 0;
+        syndrome = std::vector<int>(n-k,0);
+        
+        //licze synrom
+        for(int i = 0; i < n-k; i++) {
+            for(int j = 0; j < n; j++) {
+                syndrome.at(i) += code.at(j)*matrixH[j][i];
+            }
+            syndrome.at(i) = syndrome.at(i)%2;
+        }
+        
+        //licze bledy w syndromie
+        for(int i = 0; i < n-k; i++) {
+            if(syndrome.at(i) == 1) {
+                noOfErrors++;
+            }
+        }
+        
+        
+        
+        
+        
+        if(noOfErrors == 0) {
+            correct = 1;
+            break;
+        }
+        if(noOfErrors <= t) {
+            correct = 0;
+            doCorrection();
+            while(swap--) {
+                cyclicSwap(0);
+            }
+            
+            break;
+        }
+        if(noOfErrors > t) {
+            correct = 0;
+
+        }
+        cyclicSwap(1);
+        swap++;
     }
-    if(noOfErrors <= t) {
-        correct = 0;
-        doCorrection();
-    }
-    if(noOfErrors > t) {
-        correct = 0;
-        tryCorrection();
-    }
+    if(swap == n) noOfErrors = -1;
     
     return syndrome;
 }
@@ -57,7 +97,30 @@ void Decoder::doCorrection() {
 }
 
 void Decoder::tryCorrection() {
+    swap++;
+    cyclicSwap(1);
+    checkValidity();
+}
+
+void Decoder::cyclicSwap(bool dir) {
     
+    if(dir == 1) {
+        int temp = code.at(0);
+        
+        for(int i = 0; i < n-1; i++) {
+            code.at(i) = code.at(i+1);
+        }
+        code.at(n-1) = temp;
+    }
+    
+    if(dir == 0) {
+        int temp = code.at(n-1);
+        
+        for(int i = n-1; i > 0; i--) {
+            code.at(i) = code.at(i-1);
+        }
+        code.at(0) = temp;
+    }
 }
 
 bool Decoder::isDataValid(std::vector<int> data) {
@@ -80,7 +143,7 @@ bool Decoder::isDataValid(std::vector<int> data) {
 void Decoder::formatData() {
     
     for(int i = 0; i < k; i++) {
-        message.at(i) = message.at(i)%2;
+        message.at(i) = code.at(i);
     }
     formatOutputData(message);
 }
@@ -90,6 +153,7 @@ std::vector<int> Decoder::decodeData(std::vector<int> data) {
     reset();
     if(!isDataValid(data)) {
         result = errorMessage;
+        noOfErrors = -2;
         return std::vector<int>(1,-1);
     }
     code = data;
@@ -105,6 +169,24 @@ void Decoder::reset() {
     correct = 1;
     correctable = 1;
     noOfErrors = 0;
+    swap = 0;
     syndrome = std::vector<int>(n-k,0);
+}
+
+std::string Decoder::convertToString(std::vector<int> data) {
+    std::string aa = "";
+    for(int i = 0; i < data.size(); i++) {
+        aa.append(std::to_string(data.at(i)));
+    }
+    return aa;
+}
+
+std::string Decoder::getCorrectCode() {
+    std::string aa = convertToString(code);
+    return aa;
+}
+
+int Decoder::getCode() {
+    return noOfErrors;
 }
 
