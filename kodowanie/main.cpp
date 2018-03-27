@@ -10,6 +10,8 @@
 #include <vector>
 #include <string>
 #include "kod.hpp"
+#include "coder.hpp"
+#include "decoder.hpp"
 
 void division(std::vector<int> poly1, std::vector<int> poly2) {
     
@@ -41,7 +43,7 @@ int main() {
     std::cout << "Wprowadź slowo informacyjne: ";
     std::cin >> str;
     
-    std::cout << k.formatOutputData(k.encodeData(k.loadData(str)));
+    std::cout << k.formatOutputData(k.decodeData(k.loadData(str)));
     if(k.isCorrect()) {
         std::cout << "Kod poprawny";
     } else {

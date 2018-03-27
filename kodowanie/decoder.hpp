@@ -1,20 +1,20 @@
 //
-//  kod.hpp
+//  decoder.hpp
 //  kodowanie
 //
-//  Created by Adam Stanislawski on 26.03.2018.
+//  Created by Adam Stanislawski on 27.03.2018.
 //  Copyright © 2018 Adam Stanislawski. All rights reserved.
 //
 
-#ifndef kod_hpp
-#define kod_hpp
+#ifndef decoder_hpp
+#define decoder_hpp
 
 #include <stdio.h>
 #include <vector>
 #include <iostream>
 #include <string>
 
-class Kod {
+class Decoder {
     static const int n = 8;
     static const int k = 3;
     const int gen[n-k+1] = {
@@ -29,7 +29,7 @@ class Kod {
     
     int genMatrix[k][n];
     int matrixH[n][n-k];
-   // std::vector<int> remainder[k] = {std::vector<int>(n,-1)};
+    // std::vector<int> remainder[k] = {std::vector<int>(n,-1)};
     
     bool correct = 1;
     bool correctable = 1;
@@ -41,7 +41,7 @@ class Kod {
     void formatData();
     std::vector<int> division(std::vector<int> poly1, std::vector<int> poly2);
 public:
-    Kod();
+    Decoder();
     std::vector<int> loadData(std::string data);
     std::vector<int> encodeData(std::vector<int> data);
     std::vector<int> decodeData(std::vector<int> data);
@@ -50,4 +50,4 @@ public:
     bool isCorrectable();
 };
 
-#endif /* kod_hpp */
+#endif /* decoder_hpp */

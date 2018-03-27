@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		E84BE97720692960009B3310 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E84BE97620692960009B3310 /* main.cpp */; };
 		E84BE97F206929AF009B3310 /* kod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E84BE97D206929AF009B3310 /* kod.cpp */; };
+		E84BE982206A94AC009B3310 /* coder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E84BE980206A94AC009B3310 /* coder.cpp */; };
+		E84BE985206A94DB009B3310 /* decoder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E84BE983206A94DB009B3310 /* decoder.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,10 @@
 		E84BE97620692960009B3310 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E84BE97D206929AF009B3310 /* kod.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = kod.cpp; sourceTree = "<group>"; };
 		E84BE97E206929AF009B3310 /* kod.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = kod.hpp; sourceTree = "<group>"; };
+		E84BE980206A94AC009B3310 /* coder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = coder.cpp; sourceTree = "<group>"; };
+		E84BE981206A94AC009B3310 /* coder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = coder.hpp; sourceTree = "<group>"; };
+		E84BE983206A94DB009B3310 /* decoder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = decoder.cpp; sourceTree = "<group>"; };
+		E84BE984206A94DB009B3310 /* decoder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = decoder.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +67,10 @@
 			isa = PBXGroup;
 			children = (
 				E84BE97620692960009B3310 /* main.cpp */,
+				E84BE980206A94AC009B3310 /* coder.cpp */,
+				E84BE981206A94AC009B3310 /* coder.hpp */,
+				E84BE983206A94DB009B3310 /* decoder.cpp */,
+				E84BE984206A94DB009B3310 /* decoder.hpp */,
 				E84BE97D206929AF009B3310 /* kod.cpp */,
 				E84BE97E206929AF009B3310 /* kod.hpp */,
 			);
@@ -124,7 +134,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E84BE982206A94AC009B3310 /* coder.cpp in Sources */,
 				E84BE97F206929AF009B3310 /* kod.cpp in Sources */,
+				E84BE985206A94DB009B3310 /* decoder.cpp in Sources */,
 				E84BE97720692960009B3310 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

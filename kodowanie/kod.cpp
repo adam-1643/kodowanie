@@ -62,6 +62,8 @@ std::vector<int> Kod::checkValidity() {
         }
         syndrome.at(i) = syndrome.at(i)%2;
     }
+    correct = 1;
+    correctable = 1;
     
     for(int i = 0; i < n-k; i++) {
         if(syndrome.at(i) == 1) {
@@ -116,13 +118,13 @@ std::vector<int> Kod::encodeData(std::vector<int> data) {
     }
     code = std::vector<int>(n,0);
     
-    for(int i = 0; i < k; i++) {
-        for(int j = 0; j < n-k+1; j++) {
-            if(data.at(k-1-i) == 1 && gen[n-k-j] == 1) code.at(n-1-i-j)++;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < k; j++) {
+            if(data.at(j) == 1 && genMatrix[j][i] == 1) code.at(i)++;
         }
     }
     formatData();
-    //checkValidity();
+    
     return code;
 }
 
@@ -131,7 +133,9 @@ std::vector<int> Kod::decodeData(std::vector<int> data) {
     if(!isDataValid(data, 1)) {
         return std::vector<int>(1,-1);
     }
-        
+    code = data;
+    
+    checkValidity();
     return message;
 }
 
