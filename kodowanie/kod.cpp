@@ -89,15 +89,16 @@ std::vector<int> Kod::division(std::vector<int> poly1, std::vector<int> poly2) {
     return poly1;
 }
 
-std::string Kod::formatOutputData(std::vector<int> data) {
-   
-    std::string output;
+void Kod::formatOutputData(std::vector<int> data) {
     
+    result = "";
     for(int i = 0; i < data.size(); i++) {
-        output.append(std::to_string(data.at(i)));
+        result.append(std::to_string(data.at(i)));
     }
-    
-    return output;
+}
+
+std::string Kod::getResult() {
+    return result;
 }
 
 

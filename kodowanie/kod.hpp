@@ -31,6 +31,8 @@ protected:
     int genMatrix[k][n];
     int matrixH[n][n-k];
     
+    std::string result;
+    
     std::vector<int> message;
     std::vector<int> code;
 
@@ -41,9 +43,11 @@ protected:
 public:
     Kod();
     std::vector<int> loadData(std::string data);
-    std::string formatOutputData(std::vector<int> data);
+    void formatOutputData(std::vector<int> data);
     void createGenMatrix();
     void createMatrixH();
+    
+    std::string getResult();
 };
 
 #endif /* kod_hpp */
