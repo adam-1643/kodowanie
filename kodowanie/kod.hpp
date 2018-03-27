@@ -38,18 +38,18 @@ protected:
     std::vector<int> message;   //wektor ciągu informacyjnego
     std::vector<int> code;      //wektor ciągu kodowego
 
-    virtual bool isDataValid(std::vector<int> data) {return true;};
-    virtual void formatData() {};
+    virtual bool isDataValid(std::vector<int> data) {return true;};         //sprawdzanie poprawności wprowadzanych danych
+    virtual void formatData() {};                                           //formatowanie wyniku na tekst
     
     std::vector<int> division(std::vector<int> poly1, std::vector<int> poly2);
 public:
     Kod();
-    std::vector<int> loadData(std::string data);
-    void formatOutputData(std::vector<int> data);
-    void createGenMatrix();
-    void createMatrixH();
+    std::vector<int> loadData(std::string data);        //formatoawnie danych z tekstu na wektor
+    void formatOutputData(std::vector<int> data);       //formatowanie danych z wektora na tekst
+    void createGenMatrix();                             //tworzenie macierzy generującej
+    void createMatrixH();                               //tworzenie macierzy H transponowanej
     
-    std::string getResult();
+    std::string getResult();                            //pobieranie danych ze słowem lub błędem
 };
 
 #endif /* kod_hpp */

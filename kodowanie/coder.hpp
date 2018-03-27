@@ -18,12 +18,12 @@
 
 class Coder : public Kod {
         
-    virtual bool isDataValid(std::vector<int> data);
-    virtual void formatData();
+    virtual bool isDataValid(std::vector<int> data);        //sprawdzanie poprawności wprowadzanych danych
+    virtual void formatData();                              //formatowanie wyniku na tekst
 
 public:
     Coder();
-    std::vector<int> encodeData(std::vector<int> data);
+    std::vector<int> encodeData(std::vector<int> data);     //kodowanie danych
 };
 
 #endif /* coder_hpp */

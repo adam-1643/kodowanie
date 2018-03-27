@@ -9,7 +9,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "kod.hpp"
 #include "coder.hpp"
 #include "decoder.hpp"
 
@@ -18,6 +17,7 @@ int main() {
     Decoder k;
     std::string a;
     while(1){
+        
         std::cout << "Podaj: ";
         std::cin >> a;
         k.decodeData(k.loadData(a));

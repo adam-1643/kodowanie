@@ -47,7 +47,7 @@ std::vector<int> Coder::encodeData(std::vector<int> data) {
     
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < k; j++) {
-            if(data.at(j) == 1 && genMatrix[j][i] == 1) code.at(i)++;
+            if(data.at(j) && genMatrix[j][i]) code.at(i)++;
         }
     }
     formatData();

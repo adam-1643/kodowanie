@@ -18,13 +18,10 @@
 
 class Decoder : public Kod {
     
-    bool correct = 1;
-    bool correctable = 1;
     int noOfErrors = 0;
     int swap = 0;
 
     std::vector<int> syndrome = std::vector<int>(n-k,0);
-
     
     std::vector<int> checkValidity();
     virtual bool isDataValid(std::vector<int> data);

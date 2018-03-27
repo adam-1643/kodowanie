@@ -70,11 +70,11 @@
 				E84BE97620692960009B3310 /* main.cpp */,
 				E84BE980206A94AC009B3310 /* coder.cpp */,
 				E84BE981206A94AC009B3310 /* coder.hpp */,
-				E84BE986206A9F24009B3310 /* classDescription */,
 				E84BE983206A94DB009B3310 /* decoder.cpp */,
 				E84BE984206A94DB009B3310 /* decoder.hpp */,
 				E84BE97D206929AF009B3310 /* kod.cpp */,
 				E84BE97E206929AF009B3310 /* kod.hpp */,
+				E84BE986206A9F24009B3310 /* classDescription */,
 			);
 			path = kodowanie;
 			sourceTree = "<group>";

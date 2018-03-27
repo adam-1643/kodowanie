@@ -53,16 +53,11 @@ std::vector<int> Decoder::checkValidity() {
             }
         }
         
-        
-        
-        
-        
+
         if(noOfErrors == 0) {
-            correct = 1;
             break;
         }
         if(noOfErrors <= t) {
-            correct = 0;
             doCorrection();
             while(swap--) {
                 cyclicSwap(0);
@@ -70,24 +65,13 @@ std::vector<int> Decoder::checkValidity() {
             
             break;
         }
-        if(noOfErrors > t) {
-            correct = 0;
 
-        }
         cyclicSwap(1);
         swap++;
     }
     if(swap == n) noOfErrors = -1;
     
     return syndrome;
-}
-
-bool Decoder::isCorrect() {
-    return correct;
-}
-
-bool Decoder::isCorrectable() {
-    return correctable;
 }
 
 void Decoder::doCorrection() {
@@ -166,8 +150,6 @@ std::vector<int> Decoder::decodeData(std::vector<int> data) {
 void Decoder::reset() {
     code = std::vector<int>(n,0);
     message = std::vector<int>(k,0);
-    correct = 1;
-    correctable = 1;
     noOfErrors = 0;
     swap = 0;
     syndrome = std::vector<int>(n-k,0);

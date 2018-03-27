@@ -62,18 +62,16 @@ void Kod::createMatrixH() {
 std::vector<int> Kod::loadData(std::string data) {
     
     std::vector<int> vec;
-    
     for(int i = 0; i < data.size(); i++) {
         vec.push_back(data.at(i) - '0');
     }
-    
     return vec;
 }
 
 std::vector<int> Kod::division(std::vector<int> poly1, std::vector<int> poly2) {
     
-    int l = poly1.size();
-    int g = poly2.size();
+    int l = int(poly1.size());
+    int g = int(poly2.size());
     
     for(int i = 0; i < l-g+1; i++) {
         if(poly1.at(i) == 0) continue;
