@@ -16,26 +16,27 @@
 
 class Kod {
 protected:
-    static const int n = 8;
-    static const int k = 3;
-    const int gen[n-k+1] = {
-        //1,      //x^6
-        1,      //x^5
-        1,      //x^4
-        0,      //x^3
-        0,      //x^2
-        1,      //x^1
-        1,      //x^0
+    static const int n = 8;     //długość słów kodowych
+    static const int k = 3;     //długość słów informacyjnych
+    static const int t = 1;     //zdolność korekcyjna
+    const int gen[n-k+1] = {    //wielomian generujący
+        //1,                //x^6
+        1,                  //x^5
+        1,                  //x^4
+        0,                  //x^3
+        0,                  //x^2
+        1,                  //x^1
+        1,                  //x^0
     };
     
-    int genMatrix[k][n];
-    int matrixH[n][n-k];
+    int genMatrix[k][n];        //macierz generująca kod systematyczny
+    int matrixH[n][n-k];        //macierz H transponowana
     
-    std::string result;
-    std::string errorMessage;
+    std::string result;         //wynik operacji
+    std::string errorMessage;   //wiadomość o błędzie, jeśli wystąpił
     
-    std::vector<int> message;
-    std::vector<int> code;
+    std::vector<int> message;   //wektor ciągu informacyjnego
+    std::vector<int> code;      //wektor ciągu kodowego
 
     virtual bool isDataValid(std::vector<int> data) {return true;};
     virtual void formatData() {};

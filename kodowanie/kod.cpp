@@ -9,11 +9,6 @@
 #include "kod.hpp"
 
 Kod::Kod() {
-    
-    createGenMatrix();
-    createMatrixH();
-
-    
 }
 
 void Kod::createGenMatrix() {
