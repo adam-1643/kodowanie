@@ -16,30 +16,31 @@ Decoder::Decoder() {
 
 std::vector<int> Decoder::checkValidity() {
     
-    noOfErrors = 0;
-    syndrome = std::vector<int>(n-k,0);
+//    noOfErrors = 0;
+//    syndrome = std::vector<int>(n-k,0);
+//
+//    //liczę syndrom
+//    for(int i = 0; i < n-k; i++) {
+//        for(int j = 0; j < n; j++) {
+//            syndrome.at(i) += code.at(j)*matrixH[j][i];
+//        }
+//        syndrome.at(i) = syndrome.at(i)%2;
+//    }
+//
+//    //liczę błędy w syndromie
+//    for(int i = 0; i < n-k; i++) {
+//        if(syndrome.at(i) == 1) {
+//            noOfErrors++;
+//        }
+//    }
     
-    //licze synrom
-    for(int i = 0; i < n-k; i++) {
-        for(int j = 0; j < n; j++) {
-            syndrome.at(i) += code.at(j)*matrixH[j][i];
-        }
-        syndrome.at(i) = syndrome.at(i)%2;
-    }
-    
-    //licze bledy w syndromie
-    for(int i = 0; i < n-k; i++) {
-        if(syndrome.at(i) == 1) {
-            noOfErrors++;
-        }
-    }
-
+    //liczę syndrom dla przesunięć cyklicznych
     while(swap < n) {
         
         noOfErrors = 0;
         syndrome = std::vector<int>(n-k,0);
         
-        //licze synrom
+        //liczę syndrom
         for(int i = 0; i < n-k; i++) {
             for(int j = 0; j < n; j++) {
                 syndrome.at(i) += code.at(j)*matrixH[j][i];
@@ -47,35 +48,39 @@ std::vector<int> Decoder::checkValidity() {
             syndrome.at(i) = syndrome.at(i)%2;
         }
         
-        //licze bledy w syndromie
+        //liczę błędy w syndromie
         for(int i = 0; i < n-k; i++) {
             if(syndrome.at(i) == 1) {
                 noOfErrors++;
             }
         }
         
-
+        //jeśli nie ma błędów przerwij
         if(noOfErrors == 0) {
             break;
         }
+        
+        //jeśli błąd można skorygować, skoryguj i przerwij
         if(noOfErrors <= t) {
             doCorrection();
             while(swap--) {
                 cyclicSwap(0);
             }
-            
             break;
         }
 
+        //wykonaj przesunięcie
         cyclicSwap(1);
         swap++;
     }
+    //jeśli przesunięto cały kod, to błąd jest niekorygowalny
     if(swap == n) noOfErrors = -1;
     
     return syndrome;
 }
 
 void Decoder::doCorrection() {
+    //dodanie syndromu do kodu
     for(int i = k; i < n; i++) {
         code.at(i) = ( code.at(i) + syndrome.at(i-k) ) % 2;
     }
@@ -83,6 +88,7 @@ void Decoder::doCorrection() {
 
 void Decoder::cyclicSwap(bool dir) {
     
+    //przesunięcie w lewo
     if(dir == 1) {
         int temp = code.at(0);
         
@@ -92,6 +98,7 @@ void Decoder::cyclicSwap(bool dir) {
         code.at(n-1) = temp;
     }
     
+    //przesunięcie w prawo
     if(dir == 0) {
         int temp = code.at(n-1);
         
@@ -151,16 +158,16 @@ void Decoder::reset() {
 }
 
 std::string Decoder::convertToString(std::vector<int> data) {
-    std::string aa = "";
+    std::string str = "";
     for(int i = 0; i < data.size(); i++) {
-        aa.append(std::to_string(data.at(i)));
+        str.append(std::to_string(data.at(i)));
     }
-    return aa;
+    return str;
 }
 
 std::string Decoder::getCorrectCode() {
-    std::string aa = convertToString(code);
-    return aa;
+    std::string str = convertToString(code);
+    return str;
 }
 
 int Decoder::getCode() {

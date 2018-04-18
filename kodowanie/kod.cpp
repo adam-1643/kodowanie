@@ -14,11 +14,14 @@ Kod::Kod() {
 void Kod::createGenMatrix() {
     std::vector<int> rem = std::vector<int>(n,-1);
     std::vector<int> genVec = std::vector<int>(n-k+1,1);
+    
+    //wektor z wielomianem generującym
     for(int i = 0; i < n-k+1; i++) {
         genVec.at(i) = gen[i];
     }
+    
+    // wartości początkowe macierzy generującej
     for(int i = 0; i < k; i++) {
-        
         for(int j = 0; j < n; j++) {
             genMatrix[i][j] = -1;
         }
@@ -26,10 +29,12 @@ void Kod::createGenMatrix() {
     
     for(int i = 0; i < k; i++) {
         
+        //reszta z dzielenia x^n przez wielomian generujący
         rem = std::vector<int>(n-i,0);
         rem.at(0) = 1;
         rem = division(rem, genVec);
         
+        //macierz generująca stworzona wg wzoru na macierz systematyczną z wielomianu
         for(int j = 0; j < n; j++) {
             genMatrix[i][j] = i == j ? 1 : 0;
             genMatrix[i][j]+= j >= i ? rem.at(j-i) : 0;
@@ -143,7 +148,7 @@ void Kod::printMatrixH() {
     }
     std::cout << "\n";
     
-    for(int i = 0; i < n-k+1; i++) {
+    for(int i = 0; i < k; i++) {
         std::cout << "|";
         for(int j = 0; j < n-k; j++) {
             std::cout << matrixH[i][j];
@@ -156,7 +161,7 @@ void Kod::printMatrixH() {
     }
     std::cout << "\n";
     
-    for(int i = n-k+1; i < n; i++) {
+    for(int i = k; i < n; i++) {
         std::cout << "|";
         for(int j = 0; j < n-k; j++) {
             std::cout << matrixH[i][j];
@@ -169,6 +174,10 @@ void Kod::printMatrixH() {
     }
     std::cout << "\n";
     
+}
+
+void Kod::printKodParam() {
+    std::cout << "Kod (" << n << ", " << k << ", " << t << ")\n";
 }
 
 

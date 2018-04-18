@@ -16,21 +16,21 @@
 
 class Kod {
 protected:
-    static const int n = 7;     //długość słów kodowych
-    static const int k = 4;     //długość słów informacyjnych
+    static const int n = 15;     //długość słów kodowych
+    static const int k = 7;     //długość słów informacyjnych
     int t = 0;                  //zdolność korekcyjna
     
     const int gen[n-k+1] = {    //wielomian generujący
         //1,                  //x^10
         //0,                  //x^9
-       // 1,                  //x^8
-       // 1,                  //x^7
-       // 1,                  //x^6
-       // 0,                  //x^5
-      //  1,                  //x^4
-        1,                  //x^3
+        1,                  //x^8
+        1,                  //x^7
+        1,                  //x^6
+        0,                  //x^5
+        1,                  //x^4
+        0,                  //x^3
         0,                  //x^2
-        1,                  //x^1
+        0,                  //x^1
         1,                  //x^0
     };
     
@@ -57,6 +57,7 @@ public:
     
     void printGenMatrix();                              //wypisuje macierz generującą
     void printMatrixH();                                //wypisuje macierz H transponowaną
+    void printKodParam();                               //wypisuje parametry kodu
 };
 
 #endif /* kod_hpp */

@@ -12,30 +12,18 @@
 #include "coder.hpp"
 #include "decoder.hpp"
 
-std::string kody[10] {
-    "100100",
-    "110111",
-    "110001",
-    "010111",
-    "011010",
-    "101111",
-    "111100",
-    "110011",
-    "001010",
-    "010101",
-};
-
 int main() {
     
     Decoder dec;
     std::string a;
     
+    dec.printKodParam();
     dec.printGenMatrix();
     dec.printMatrixH();
     
     while(1){
         
-        std::cout << "Podaj: ";
+        std::cout << "Podaj kod: ";
         std::cin >> a;
         dec.decodeData(dec.loadData(a));
         
