@@ -18,28 +18,27 @@
 
 class Decoder : public Kod {
     
-    int noOfErrors = 0;
-    int swap = 0;
+    int noOfErrors = 0;                 //liczba błędów
+    int swap = 0;                       //liczba przesunięć cyklicznych
 
-    std::vector<int> syndrome = std::vector<int>(n-k,0);
+    std::vector<int> syndrome = std::vector<int>(n-k,0);        //wektor syndromu
     
     std::vector<int> checkValidity();
     virtual bool isDataValid(std::vector<int> data);
     virtual void formatData();
     
-    void cyclicSwap(bool dir);
+    void cyclicSwap(bool dir);          //przesunięcie cykliczne
     
-    std::string convertToString(std::vector<int> data);
+    std::string convertToString(std::vector<int> data);     //formatowanie wektora na tekst
 public:
     Decoder();
-    std::vector<int> decodeData(std::vector<int> data);
-    bool isCorrect();
-    bool isCorrectable();
-    void doCorrection();
-    void tryCorrection();
-    void reset();
-    int getCode();
-    std::string getCorrectCode();
+    std::vector<int> decodeData(std::vector<int> data);     //dekodowanie danych
+
+    void doCorrection();                //korekcja kodu
+    void reset();                       //resetowanie danych
+    
+    int getCode();                      //pobieranie kodu operacji
+    std::string getCorrectCode();       //pobieranie prawidłowego słowa kodowego
 };
 
 #endif /* decoder_hpp */

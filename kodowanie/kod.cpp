@@ -94,6 +94,23 @@ std::string Kod::getResult() {
     return result;
 }
 
+int Kod::calcT() {
+    int ones[k] = {0};
+    for(int i = 0; i < k; i++) {
+        for(int j = 0; j < n-k; j++) {
+            if(matrixH[i][j] == 1) ones[i]++;
+        }
+    }
+    int min = ones[0];
+    
+    for(int i = 1; i < k; i++) {
+        if(ones[i] < min) min = ones[i];
+    }
+    std::cout << "Odleglosc Hamminga: " << min+1 << std::endl;
+    std::cout << "Zdolnosc detekcyjna: " << min << std::endl;
+    std::cout << "Zdolnosc korekcyjna: " << min/2 << std::endl;
+    return min/2;
+}
 
 
 

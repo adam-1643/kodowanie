@@ -16,14 +16,18 @@
 
 class Kod {
 protected:
-    static const int n = 8;     //długość słów kodowych
-    static const int k = 3;     //długość słów informacyjnych
-    static const int t = 1;     //zdolność korekcyjna
+    static const int n = 7;     //długość słów kodowych
+    static const int k = 4;     //długość słów informacyjnych
+    int t = 0;                  //zdolność korekcyjna
     const int gen[n-k+1] = {    //wielomian generujący
-        //1,                //x^6
-        1,                  //x^5
-        1,                  //x^4
-        0,                  //x^3
+        //1,                  //x^10
+        //0,                  //x^9
+       // 1,                  //x^8
+       // 1,                  //x^7
+       // 1,                  //x^6
+       // 0,                  //x^5
+      //  1,                  //x^4
+        1,                  //x^3
         0,                  //x^2
         1,                  //x^1
         1,                  //x^0
@@ -41,7 +45,7 @@ protected:
     virtual bool isDataValid(std::vector<int> data) {return true;};         //sprawdzanie poprawności wprowadzanych danych
     virtual void formatData() {};                                           //formatowanie wyniku na tekst
     
-    std::vector<int> division(std::vector<int> poly1, std::vector<int> poly2);
+    std::vector<int> division(std::vector<int> poly1, std::vector<int> poly2);      //dzielenie wielomianów binarnie
 public:
     Kod();
     std::vector<int> loadData(std::string data);        //formatoawnie danych z tekstu na wektor
@@ -50,6 +54,7 @@ public:
     void createMatrixH();                               //tworzenie macierzy H transponowanej
     
     std::string getResult();                            //pobieranie danych ze słowem lub błędem
+    int calcT();
 };
 
 #endif /* kod_hpp */

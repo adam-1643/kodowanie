@@ -11,6 +11,7 @@
 Decoder::Decoder() {
     createGenMatrix();
     createMatrixH();
+    t = calcT();
 }
 
 std::vector<int> Decoder::checkValidity() {
@@ -80,12 +81,6 @@ void Decoder::doCorrection() {
     }
 }
 
-void Decoder::tryCorrection() {
-    swap++;
-    cyclicSwap(1);
-    checkValidity();
-}
-
 void Decoder::cyclicSwap(bool dir) {
     
     if(dir == 1) {
@@ -150,9 +145,9 @@ std::vector<int> Decoder::decodeData(std::vector<int> data) {
 void Decoder::reset() {
     code = std::vector<int>(n,0);
     message = std::vector<int>(k,0);
+    syndrome = std::vector<int>(n-k,0);
     noOfErrors = 0;
     swap = 0;
-    syndrome = std::vector<int>(n-k,0);
 }
 
 std::string Decoder::convertToString(std::vector<int> data) {

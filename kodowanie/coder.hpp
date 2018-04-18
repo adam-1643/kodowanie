@@ -24,6 +24,7 @@ class Coder : public Kod {
 public:
     Coder();
     std::vector<int> encodeData(std::vector<int> data);     //kodowanie danych
+    void dd();
 };
 
 #endif /* coder_hpp */
