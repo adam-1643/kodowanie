@@ -53,24 +53,3 @@ std::vector<int> Coder::encodeData(std::vector<int> data) {
     
     return code;
 }
-
-void Coder::dd() {
-    
-    std::vector<int> genVec = std::vector<int>(n-k+1,1);
-    std::vector<int> vec = std::vector<int>(n+1,0);
-    
-    vec.at(n) = 1;
-    vec.at(0) = 1;
-    
-    for(int i = 0; i < n-k+1; i++) {
-        genVec.at(i) = gen[i];
-    }
-    
-    std::vector<int> d = division(vec, genVec);
-    std::cout << ".";
-    for(int i = 0; i < d.size(); i++) {
-        std::cout << d.at(i) << " ";
-    }
-    std::cout << ".";
-    
-}

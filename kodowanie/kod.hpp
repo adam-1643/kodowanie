@@ -19,6 +19,7 @@ protected:
     static const int n = 7;     //długość słów kodowych
     static const int k = 4;     //długość słów informacyjnych
     int t = 0;                  //zdolność korekcyjna
+    
     const int gen[n-k+1] = {    //wielomian generujący
         //1,                  //x^10
         //0,                  //x^9
@@ -35,26 +36,27 @@ protected:
     
     int genMatrix[k][n];        //macierz generująca kod systematyczny
     int matrixH[n][n-k];        //macierz H transponowana
+    std::vector<int> message;   //wektor ciągu informacyjnego
+    std::vector<int> code;      //wektor ciągu kodowego
     
     std::string result;         //wynik operacji
     std::string errorMessage;   //wiadomość o błędzie, jeśli wystąpił
     
-    std::vector<int> message;   //wektor ciągu informacyjnego
-    std::vector<int> code;      //wektor ciągu kodowego
-
-    virtual bool isDataValid(std::vector<int> data) {return true;};         //sprawdzanie poprawności wprowadzanych danych
-    virtual void formatData() {};                                           //formatowanie wyniku na tekst
-    
+    void createGenMatrix();                             //tworzenie macierzy generującej
+    void createMatrixH();                               //tworzenie macierzy H transponowanej
     std::vector<int> division(std::vector<int> poly1, std::vector<int> poly2);      //dzielenie wielomianów binarnie
+    int calcT();                                                                    //liczenie zdolności korekcyjnej
+    
+    virtual bool isDataValid(std::vector<int> data) {return true;};                 //sprawdzanie poprawności wprowadzanych danych
+    virtual void formatData() {};                                                   //formatowanie wyniku na tekst
 public:
     Kod();
     std::vector<int> loadData(std::string data);        //formatoawnie danych z tekstu na wektor
     void formatOutputData(std::vector<int> data);       //formatowanie danych z wektora na tekst
-    void createGenMatrix();                             //tworzenie macierzy generującej
-    void createMatrixH();                               //tworzenie macierzy H transponowanej
-    
     std::string getResult();                            //pobieranie danych ze słowem lub błędem
-    int calcT();
+    
+    void printGenMatrix();                              //wypisuje macierz generującą
+    void printMatrixH();                                //wypisuje macierz H transponowaną
 };
 
 #endif /* kod_hpp */

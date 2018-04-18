@@ -33,29 +33,24 @@ void Kod::createGenMatrix() {
         for(int j = 0; j < n; j++) {
             genMatrix[i][j] = i == j ? 1 : 0;
             genMatrix[i][j]+= j >= i ? rem.at(j-i) : 0;
-            std::cout << genMatrix[i][j];
-            if(j == k-1) std::cout << "|";
         }
-        std::cout << "\n";
     }
 }
 
 void Kod::createMatrixH() {
-    std::cout << "\n-------\n\n";
+
+    //wiersze z macierzy generującej
     for(int i = 0; i < k; i++) {
         for(int j = 0; j < n-k; j++) {
             matrixH[i][j] = genMatrix[i][j+k];
-            std::cout << matrixH[i][j];
         }
-        std::cout << "\n";
     }
-    std::cout << "----\n";
+    
+    //macierz jednostkowa na koniec
     for(int i = k; i < n; i++) {
         for(int j = 0; j < n-k; j++) {
             matrixH[i][j] = i-k == j ? 1 : 0;
-            std::cout << matrixH[i][j];
         }
-        std::cout << "\n";
     }
 }
 
@@ -70,15 +65,18 @@ std::vector<int> Kod::loadData(std::string data) {
 
 std::vector<int> Kod::division(std::vector<int> poly1, std::vector<int> poly2) {
     
-    int l = int(poly1.size());
-    int g = int(poly2.size());
+    int p1Size = int(poly1.size());
+    int p2Size = int(poly2.size());
     
-    for(int i = 0; i < l-g+1; i++) {
+    //algorytm binarnego dzielenia wielomianów
+    for(int i = 0; i < p1Size-p2Size+1; i++) {
         if(poly1.at(i) == 0) continue;
-        for(int j = 0; j < g; j++) {
+
+        for(int j = 0; j < p2Size; j++) {
             poly1.at(j+i) = (poly1.at(j+i) + poly2.at(j)) % 2;
         }
     }
+    
     return poly1;
 }
 
@@ -96,20 +94,81 @@ std::string Kod::getResult() {
 
 int Kod::calcT() {
     int ones[k] = {0};
+    
+    //liczenie odległości Hamminga dla wierszy niebędących wierszami macierzy jednostkowej
     for(int i = 0; i < k; i++) {
         for(int j = 0; j < n-k; j++) {
             if(matrixH[i][j] == 1) ones[i]++;
         }
     }
-    int min = ones[0];
     
+    //najmniejsza z odległości Hamminga jest odległością minimalną
+    int min = ones[0];
     for(int i = 1; i < k; i++) {
         if(ones[i] < min) min = ones[i];
     }
-    std::cout << "Odleglosc Hamminga: " << min+1 << std::endl;
-    std::cout << "Zdolnosc detekcyjna: " << min << std::endl;
-    std::cout << "Zdolnosc korekcyjna: " << min/2 << std::endl;
+    
     return min/2;
+}
+
+void Kod::printGenMatrix() {
+    
+    std::cout << "Macierz generująca:\n";
+    for(int i = 0; i < n+3; i++) {
+        std::cout << "-";
+    }
+    std::cout << "\n";
+    
+    for(int i = 0; i < k; i++) {
+        std::cout << "|";
+        for(int j = 0; j < n; j++) {
+            std::cout << genMatrix[i][j];
+            if(j == k-1) std::cout << "|";
+        }
+        std::cout << "|\n";
+    }
+    
+    for(int i = 0; i < n+3; i++) {
+        std::cout << "-";
+    }
+    std::cout << "\n";
+    
+}
+
+void Kod::printMatrixH() {
+    
+    std::cout << "Macierz H transponowana: \n";
+    for(int i = 0; i < n-k+2; i++) {
+        std::cout << "-";
+    }
+    std::cout << "\n";
+    
+    for(int i = 0; i < n-k+1; i++) {
+        std::cout << "|";
+        for(int j = 0; j < n-k; j++) {
+            std::cout << matrixH[i][j];
+        }
+        std::cout << "|\n";
+    }
+    
+    for(int i = 0; i < n-k+2; i++) {
+        std::cout << "-";
+    }
+    std::cout << "\n";
+    
+    for(int i = n-k+1; i < n; i++) {
+        std::cout << "|";
+        for(int j = 0; j < n-k; j++) {
+            std::cout << matrixH[i][j];
+        }
+        std::cout << "|\n";
+    }
+    
+    for(int i = 0; i < n-k+2; i++) {
+        std::cout << "-";
+    }
+    std::cout << "\n";
+    
 }
 
 
